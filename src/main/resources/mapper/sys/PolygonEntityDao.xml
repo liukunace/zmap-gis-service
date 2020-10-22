@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="api.zmap.modules.sys.dao.PolygonEntityDao">
+
+    <resultMap id="polygonEntityMap" type="api.zmap.modules.sys.entity.PolygonEntity">
+        <id property="fid" column="fid"/>
+        <id property="area" column="area"/>
+        <result property="geom" column="polygon" typeHandler="api.zmap.modules.sys.type.MyGeometryTypeHandler"/>
+    </resultMap>
+
+    <select id="queryPolygon" resultMap="polygonEntityMap">
+		select p.id,p.area,p.polygon from geom_muilty_tb2 p
+	</select>
+
+    <insert id="insertPolygon" >
+        INSERT INTO geom_muilty_tb2 (id, lonlat, area, polygon) VALUES (#{id,jdbcType=VARCHAR},null,356.756,#{polygon,typeHandler=api.zmap.modules.sys.type.MyGeometryTypeHandler})
+    </insert>
+
+    <select id="queryPolygonByPolygon" resultMap="polygonEntityMap">
+		select p.id,p.area,p.polygon from geom_muilty_tb2 p where ST_intersects(p.polygon,ST_GeomFromText(${polygon},4326))
+	</select>
+
+    <select id="queryPolygonByPolygon1" resultMap="polygonEntityMap">
+		select p.id,p.area,p.polygon from geom_muilty_tb2 p where ST_intersects(p.polygon,ST_GeomFromText('Polygon((116.769442412832 36.3857854361069,116.769386416579 36.3858685156796,116.768621534751 36.386523995019,116.769442412832 36.3857854361069))',4326))
+	</select>
+
+<!--    mashan_city_design_20201010   mashan_masterplans -->
+<!--    select p.fid,p.area,p.polygon from mashan_city_design_20201010 p-->
+
+</mapper>

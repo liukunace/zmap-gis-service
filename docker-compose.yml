@@ -1,0 +1,8 @@
+version: '2'
+services:
+  zmap-fast:
+    image: zmap/fast
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.profiles.active=dev

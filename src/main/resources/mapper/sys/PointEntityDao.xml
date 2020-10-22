@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="api.zmap.modules.sys.dao.PointEntityDao">
+
+    <resultMap id="pointEntityMap" type="api.zmap.modules.sys.entity.PointEntity">
+        <id property="id" column="id"/>
+<!--        <result property="name" column="name"/>-->
+        <result property="point" column="point" typeHandler="api.zmap.modules.sys.type.MyGeometryTypeHandler"/>
+    </resultMap>
+
+    <select id="queryPoint" resultMap="pointEntityMap">
+		select p.id,p.point from mashan_point_table3 p
+	</select>
+
+<!--    <insert id="insertwwww" parameterType="PointEntity">
+    insert into student (id, name, sex,
+      rank, create_date, update_date,
+      hobbys)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+      #{rank,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
+      #{hobbys,javaType=List,jdbcType=VARCHAR,typeHandler=common.ListTypeHandler})
+  </insert>
+  		mashan_point_table3
+  -->
+
+
+
+</mapper>

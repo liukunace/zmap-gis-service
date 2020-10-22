@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="api.zmap.modules.sys.dao.PolygonMsEntityDao">
+
+    <resultMap id="polygonEntityMap" type="api.zmap.modules.sys.entity.PolygonMsEntity">
+        <id property="id" column="fid"/>
+        <id property="area" column="area"/>
+        <result property="geom" column="the_geom" typeHandler="api.zmap.modules.sys.type.MyGeometryTypeHandler"/>
+    </resultMap>
+
+    <select id="queryPolygon" resultMap="polygonEntityMap">
+		select p.fid,p.area,p.the_geom from mashan_city_design_20201010 p
+	</select>
+
+<!--    mashan_city_design_20201010   mashan_masterplans -->
+<!--    select p.fid,p.area,p.polygon from mashan_city_design_20201010 mashan_city_design_20201020  mashan_landuse_plan_20201010  p-->
+</mapper>
